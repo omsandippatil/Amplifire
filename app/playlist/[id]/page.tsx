@@ -1,6 +1,5 @@
 "use client";
-
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { useParams } from 'next/navigation';
 import { FaPlayCircle, FaHeart, FaArrowLeft } from 'react-icons/fa';
 import { GiFlamer } from 'react-icons/gi';
@@ -8,24 +7,231 @@ import { playlists, songs } from '@/app/data';
 import { ContentContainer } from '@/app/components/ContentComponents';
 import Link from 'next/link';
 
+// Define styles using proper CSSProperties type
+const styles: Record<string, CSSProperties> = {
+  container: {
+    padding: '24px',
+    maxWidth: '1200px',
+    margin: '0 auto',
+  },
+  backButton: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    color: '#9ca3af',
+    fontSize: '14px',
+    marginBottom: '24px',
+    transition: 'color 0.2s ease',
+    cursor: 'pointer',
+    textDecoration: 'none',
+  },
+  backButtonIcon: {
+    marginRight: '8px',
+  },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    gap: '24px',
+    marginBottom: '32px',
+  },
+  playlistCard: {
+    position: 'relative',
+    height: '260px',
+    width: '100%',
+    backgroundColor: '#111',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+    border: '1px solid rgba(139, 0, 0, 0.2)',
+  },
+  playlistGradient: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(135deg, rgba(139, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%)',
+  },
+  playlistIcon: {
+    position: 'absolute',
+    inset: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#991b1b',
+    fontSize: '80px',
+    opacity: 0.7,
+  },
+  playlistInfo: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: '16px',
+    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%)',
+  },
+  playlistTitle: {
+    fontFamily: 'Oswald, sans-serif',
+    fontSize: '28px',
+    fontWeight: 'bold',
+    color: 'white',
+    letterSpacing: '0.5px',
+    margin: 0,
+  },
+  playlistTracks: {
+    fontFamily: 'Raleway, sans-serif',
+    color: '#9ca3af',
+    fontSize: '14px',
+    margin: '4px 0 0 0',
+  },
+  buttonContainer: {
+    display: 'flex',
+    gap: '12px',
+    marginTop: '24px',
+  },
+  playButton: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: '#991b1b',
+    color: 'white',
+    fontWeight: '500',
+    padding: '10px 20px',
+    borderRadius: '24px',
+    border: 'none',
+    boxShadow: '0 2px 8px rgba(139, 0, 0, 0.3)',
+    transition: 'all 0.2s ease',
+    cursor: 'pointer',
+  },
+  playButtonIcon: {
+    marginRight: '8px',
+  },
+  favoriteButton: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: '#111',
+    color: 'white',
+    padding: '10px',
+    borderRadius: '24px',
+    border: '1px solid rgba(139, 0, 0, 0.3)',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+    transition: 'all 0.2s ease',
+    cursor: 'pointer',
+  },
+  tracksHeader: {
+    fontFamily: 'Oswald, sans-serif',
+    fontSize: '22px',
+    color: 'white',
+    marginBottom: '16px',
+    paddingBottom: '8px',
+    borderBottom: '1px solid rgba(139, 0, 0, 0.2)',
+  },
+  trackList: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  trackItem: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '12px 10px',
+    borderRadius: '4px',
+    transition: 'background-color 0.2s ease',
+    borderBottom: '1px solid rgba(139, 0, 0, 0.1)',
+  },
+  trackNumber: {
+    width: '24px',
+    textAlign: 'center',
+    color: '#6b7280',
+    marginRight: '16px',
+    fontSize: '14px',
+  },
+  trackIcon: {
+    width: '36px',
+    height: '36px',
+    backgroundColor: '#111',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '4px',
+    marginRight: '16px',
+    border: '1px solid rgba(139, 0, 0, 0.2)',
+  },
+  trackInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  trackTitle: {
+    fontFamily: 'Raleway, sans-serif',
+    color: 'white',
+    fontSize: '14px',
+    fontWeight: '500',
+  },
+  trackArtist: {
+    color: '#6b7280',
+    fontSize: '13px',
+  },
+  trackMeta: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '20px',
+  },
+  trackAlbum: {
+    color: '#6b7280',
+    fontSize: '13px',
+  },
+  trackDuration: {
+    color: '#6b7280',
+    fontSize: '13px',
+  },
+  notFound: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '400px',
+  },
+  notFoundTitle: {
+    fontFamily: 'Oswald, sans-serif',
+    fontSize: '24px',
+    color: '#dc2626',
+    marginBottom: '16px',
+  },
+  notFoundLink: {
+    display: 'flex',
+    alignItems: 'center',
+    color: 'white',
+    transition: 'color 0.2s ease',
+    textDecoration: 'none',
+  },
+  errorIcon: {
+    marginRight: '8px',
+  }
+};
+
+// Create CSS for responsive grid using a CSS class instead of inline style
+const responsiveStyles = `
+  @media (min-width: 1024px) {
+    .responsive-grid {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+`;
+
 export default function PlaylistPage() {
   const params = useParams();
-  const playlistId = Number(params.id);
+  const playlistId = typeof params.id === 'string' ? parseInt(params.id, 10) : Array.isArray(params.id) ? parseInt(params.id[0], 10) : 0;
   
   // Find the playlist by ID
   const playlist = playlists.find(p => p.id === playlistId);
   
-  // Filter songs that might be in this playlist (for demo purposes)
-  // In a real app, you'd have a relationship between playlists and songs
+  // Filter songs that might be in this playlist
   const playlistSongs = songs.slice(0, playlist?.tracks || 0);
   
   if (!playlist) {
     return (
       <ContentContainer>
-        <div className="flex flex-col items-center justify-center h-96">
-          <h1 className="text-2xl font-oswald text-red-600 mb-4">Playlist Not Found</h1>
-          <Link href="/" className="text-white hover:text-red-500 transition-colors flex items-center">
-            <FaArrowLeft className="mr-2" /> Return to Home
+        <div style={styles.notFound}>
+          <h1 style={styles.notFoundTitle}>Playlist Not Found</h1>
+          <Link href="/hell" style={styles.notFoundLink}>
+            <FaArrowLeft style={styles.errorIcon} /> Return to Hell
           </Link>
         </div>
       </ContentContainer>
@@ -34,65 +240,116 @@ export default function PlaylistPage() {
   
   return (
     <ContentContainer>
-      <Link href="/" className="text-gray-400 hover:text-white mb-6 inline-flex items-center transition-colors">
-        <FaArrowLeft className="mr-2" /> Back
+      {/* Add responsive styles */}
+      <style jsx>{responsiveStyles}</style>
+      
+      <Link 
+        href="/hell" 
+        className="back-button"
+        style={styles.backButton}
+      >
+        <FaArrowLeft style={styles.backButtonIcon} /> Back to Hell
       </Link>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-1">
-          <div className="relative h-64 w-full bg-black border border-red-900/50 rounded-lg overflow-hidden shadow-lg"
-               style={{ boxShadow: '0 4px 12px rgba(139, 0, 0, 0.15)' }}>
-            <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 to-black/70"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <GiFlamer className="text-red-600 text-8xl opacity-70" />
+      <div className="responsive-grid" style={styles.grid}>
+        <div>
+          <div style={styles.playlistCard}>
+            <div style={styles.playlistGradient}></div>
+            <div style={styles.playlistIcon}>
+              <GiFlamer />
             </div>
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-              <h1 className="font-oswald text-3xl text-white font-bold tracking-wide">{playlist.name}</h1>
-              <p className="text-gray-400 font-raleway">{playlist.tracks} Tracks</p>
+            <div style={styles.playlistInfo}>
+              <h1 style={styles.playlistTitle}>{playlist.name}</h1>
+              <p style={styles.playlistTracks}>{playlist.tracks} Tracks</p>
             </div>
           </div>
           
-          <div className="mt-6 flex space-x-3">
-            <button className="bg-red-700 hover:bg-red-600 text-white font-medium px-6 py-2 rounded-full shadow-lg transition-all flex items-center"
-                    style={{ boxShadow: '0 2px 8px rgba(139, 0, 0, 0.3)' }}>
-              <FaPlayCircle className="mr-2" /> Play All
+          <div style={styles.buttonContainer}>
+            <button 
+              style={styles.playButton}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#b91c1c';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = '#991b1b';
+              }}
+            >
+              <FaPlayCircle style={styles.playButtonIcon} /> Play All
             </button>
-            <button className="bg-black border border-red-900/50 hover:border-red-600 text-white font-medium px-4 py-2 rounded-full shadow-lg transition-all">
+            <button 
+              style={styles.favoriteButton}
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = '#dc2626';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(139, 0, 0, 0.3)';
+              }}
+            >
               <FaHeart />
             </button>
           </div>
         </div>
         
-        <div className="lg:col-span-2">
-          <h2 className="font-oswald text-2xl text-white mb-4 border-b border-red-900/30 pb-2">Tracks</h2>
+        <div>
+          <h2 style={styles.tracksHeader}>Tracks</h2>
           
-          <div className="divide-y divide-red-900/20">
+          <div style={styles.trackList}>
             {playlistSongs.map((song, index) => (
-              <div key={song.id} className="group flex items-center justify-between p-3 hover:bg-black/80 rounded transition-all cursor-pointer"
-                   style={{ transition: 'all 0.2s ease' }}>
-                <div className="flex items-center">
-                  <div className="w-6 text-center text-gray-500 mr-4">
+              <div 
+                key={song.id} 
+                style={styles.trackItem}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={styles.trackNumber}>
                     <span>{index + 1}</span>
                   </div>
-                  <div className="w-10 h-10 bg-black flex items-center justify-center rounded-sm mr-4 shadow-md"
-                       style={{ border: '1px solid rgba(139, 0, 0, 0.3)' }}>
-                    <GiFlamer className="text-red-600 text-sm" />
+                  <div style={styles.trackIcon}>
+                    <GiFlamer style={{ color: '#991b1b', fontSize: '12px' }} />
                   </div>
-                  <div>
-                    <h4 className="text-white font-raleway">{song.title}</h4>
-                    <p className="text-gray-500 text-sm">{song.artist}</p>
+                  <div style={styles.trackInfo}>
+                    <h4 style={styles.trackTitle}>{song.title}</h4>
+                    <p style={styles.trackArtist}>{song.artist}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-6">
-                  <span className="text-gray-500 text-sm">{song.album}</span>
-                  <span className="text-gray-500 text-sm">{song.duration}</span>
-                  <FaHeart className="text-gray-500 invisible group-hover:visible hover:text-red-600 transition-colors" />
+                <div style={styles.trackMeta}>
+                  <span style={styles.trackAlbum}>{song.album}</span>
+                  <span style={styles.trackDuration}>{song.duration}</span>
+                  <FaHeart 
+                    style={{ 
+                      color: '#6b7280', 
+                      opacity: 0,
+                      transition: 'all 0.2s ease',
+                      cursor: 'pointer'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.color = '#dc2626';
+                      e.currentTarget.style.opacity = '1';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.color = '#6b7280';
+                      e.currentTarget.style.opacity = '0';
+                    }}
+                  />
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+      
+      {/* Add CSS for back button hover effect */}
+      <style jsx>{`
+        .back-button:hover {
+          color: white !important;
+          transform: translateX(-2px);
+        }
+      `}</style>
     </ContentContainer>
   );
 }

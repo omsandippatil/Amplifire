@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FaFire, FaSkull, FaLink, FaAngleRight } from 'react-icons/fa';
 import { GiHornedHelm, GiDevilMask } from 'react-icons/gi';
 import Link from 'next/link';
-import "@/app/globals.css"
-
+import "@/app/globals.css";
 
 // Define the ember interface for type safety
 interface Ember {
@@ -68,100 +67,84 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-red-900 flex items-center justify-center z-50">
-        <div className="w-24 h-24 relative animate-pulse">
-          {/* Minimalist fire icon in black */}
-          <FaFire className="w-full h-full text-black" />
+      <div className="loading-screen">
+        <div className="loading-icon">
+          <FaFire />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col relative font-serif">
+    <div className="app-container">
       {/* Background image */}
-      <div 
-        className="fixed inset-0 z-0 opacity-25" 
-        style={{ 
-          backgroundImage: "url('/images/dark-texture.jpg')", 
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
-      ></div>
+      <div className="background-image"></div>
       
       {/* Subtle ember animation */}
-      <div className="fixed inset-0 z-10 pointer-events-none">
+      <div className="ember-container">
         {emberPosition.map((ember, index) => (
           <div 
             key={index}
-            className="absolute rounded-full bg-orange-400 opacity-40"
+            className="ember"
             style={{
               left: `${ember.x}%`,
               top: `${ember.y}%`,
               width: `${ember.size}px`,
               height: `${ember.size}px`,
-              transition: 'top 0.5s ease-out, left 0.5s ease-out',
-              filter: 'blur(1px)'
             }}
           ></div>
         ))}
       </div>
 
-      <main className="flex-grow z-20">
+      <main className="main-content">
         {/* Hero Section */}
-        <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <section className="hero-section">
           {/* Background effects */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-red-900/20 to-black"></div>
+          <div className="hero-gradient"></div>
           
-          <div className="container mx-auto px-6 z-10 text-center">
-            {/* Added more spacing between characters in the logo */}
-            <h1 className="font-gothic text-7xl md:text-9xl mb-4 text-red-600 font-bold tracking-widest">AMPLIFIRE</h1>
-            <p className="font-serif text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-gray-300 font-light tracking-wide">
+          <div className="hero-content">
+            <h1 className="site-title">AMPLIFIRE</h1>
+            <p className="site-subtitle">
               Unleash the power of sound. Your music, amplified.
             </p>
             
-            <button 
-              onClick={handleDescend}
-              className="group relative bg-red-800 hover:bg-red-900 text-white py-3 px-8 rounded-sm font-cinzel text-lg uppercase tracking-wider transition-all duration-300 overflow-hidden border border-red-600"
-            >
-              <span className="relative z-10 flex items-center">
+            <button onClick={handleDescend} className="cta-button">
+              <span className="button-text">
                 DESCEND NOW
-                <FaFire className="ml-2" />
+                <FaFire className="button-icon" />
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-red-900 to-red-700 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+              <span className="button-background"></span>
             </button>
           </div>
         </section>
         
         {/* Features Section */}
-        <section className="py-20 bg-gradient-to-b from-black via-black/95 to-black border-t border-red-900/30">
-          <div className="container mx-auto px-6">
-            {/* Added more spacing between characters */}
-            <h2 className="font-gothic text-4xl md:text-5xl mb-16 text-center text-red-600 font-bold tracking-widest">F E A T U R E S</h2>
+        <section className="features-section">
+          <div className="section-container">
+            <h2 className="section-title">F E A T U R E S</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="features-grid">
               {[
                 {
                   title: "PREMIUM AUDIO",
                   description: "Experience exceptional sound quality with our advanced audio processing technology.",
-                  icon: <FaFire className="text-red-500 text-4xl" />
+                  icon: <FaFire className="feature-icon" />
                 },
                 {
                   title: "CUSTOM PLAYLISTS",
                   description: "Create custom playlists that match your every mood, from intense to serene.",
-                  icon: <GiHornedHelm className="text-red-500 text-4xl" />
+                  icon: <GiHornedHelm className="feature-icon" />
                 },
                 {
                   title: "OFFLINE MODE",
                   description: "Take your music anywhere with our powerful offline capabilities.",
-                  icon: <FaLink className="text-red-500 text-4xl" />
+                  icon: <FaLink className="feature-icon" />
                 }
               ].map((feature, index) => (
-                <div key={index} className="flex flex-col items-center text-center p-6 border border-red-900/50 bg-black/70 hover:bg-red-950/30 transition-all duration-300">
-                  <div className="mb-4">{feature.icon}</div>
-                  <h3 className="font-cinzel text-xl font-bold mb-3 text-white tracking-widest">{feature.title}</h3>
-                  <p className="text-gray-400 font-garamond">{feature.description}</p>
+                <div key={index} className="feature-card">
+                  <div className="feature-icon-wrapper">{feature.icon}</div>
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-description">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -169,12 +152,11 @@ export default function Home() {
         </section>
         
         {/* Pricing Section */}
-        <section className="py-20 bg-black border-t border-red-900/30">
-          <div className="container mx-auto px-6">
-            {/* Added more spacing between characters */}
-            <h2 className="font-gothic text-4xl md:text-5xl mb-16 text-center text-red-600 font-bold tracking-widest">SELECT  YOUR  PLAN</h2>
+        <section className="pricing-section">
+          <div className="section-container">
+            <h2 className="section-title">SELECT YOUR PLAN</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="pricing-grid">
               {[
                 {
                   name: "STANDARD",
@@ -187,7 +169,7 @@ export default function Home() {
                     "Basic playlist features"
                   ],
                   highlighted: false,
-                  icon: <FaSkull className="text-red-500 text-3xl" />
+                  icon: <FaSkull className="plan-icon" />
                 },
                 {
                   name: "PREMIUM",
@@ -201,7 +183,7 @@ export default function Home() {
                     "Exclusive content access"
                   ],
                   highlighted: true,
-                  icon: <GiHornedHelm className="text-red-500 text-3xl" />
+                  icon: <GiHornedHelm className="plan-icon" />
                 },
                 {
                   name: "ANNUAL",
@@ -215,42 +197,39 @@ export default function Home() {
                     "Priority customer support"
                   ],
                   highlighted: false,
-                  icon: <GiDevilMask className="text-red-500 text-3xl" />
+                  icon: <GiDevilMask className="plan-icon" />
                 }
               ].map((plan, index) => (
                 <div 
                   key={index} 
-                  className={`flex flex-col p-8 border ${plan.highlighted ? 'border-red-600 bg-gradient-to-b from-red-950/40 to-black' : 'border-red-900/30 bg-black'} relative group`}
+                  className={`pricing-card ${plan.highlighted ? 'highlighted' : ''}`}
                 >
                   {plan.highlighted && (
-                    <div className="absolute -top-4 left-0 right-0 text-center">
-                      <span className="bg-red-600 text-white text-sm py-1 px-3 font-cinzel tracking-wider">MOST POPULAR</span>
+                    <div className="popular-tag">
+                      <span>MOST POPULAR</span>
                     </div>
                   )}
                   
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="plan-icon-wrapper">
                     {plan.icon}
                   </div>
                   
-                  <h3 className="font-cinzel text-2xl font-bold mb-2 text-white text-center tracking-widest">{plan.name}</h3>
-                  <div className="mb-6 text-center">
-                    <span className="text-4xl font-bold text-red-600 font-gothic">{plan.price}</span>
-                    <span className="text-gray-500 ml-1 font-garamond">{plan.period}</span>
+                  <h3 className="plan-name">{plan.name}</h3>
+                  <div className="plan-price">
+                    <span className="price-amount">{plan.price}</span>
+                    <span className="price-period">{plan.period}</span>
                   </div>
                   
-                  <ul className="mb-8 flex-grow">
+                  <ul className="plan-features">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="mb-2 text-gray-400 flex items-center font-garamond">
-                        <FaAngleRight className="text-red-600 mr-2 flex-shrink-0" />
+                      <li key={i} className="feature-item">
+                        <FaAngleRight className="list-icon" />
                         {feature}
                       </li>
                     ))}
                   </ul>
                   
-                  <button className={`
-                    ${plan.highlighted ? 'bg-red-600 hover:bg-red-700' : 'bg-black hover:bg-red-950 border border-red-900'} 
-                    text-white py-2 px-4 font-cinzel font-medium tracking-wide transition-colors duration-300
-                  `}>
+                  <button className={`select-plan-button ${plan.highlighted ? 'highlighted' : ''}`}>
                     SELECT PLAN
                   </button>
                 </div>
@@ -260,75 +239,546 @@ export default function Home() {
         </section>
         
         {/* Call to Action */}
-        <section className="py-20 bg-gradient-to-b from-black to-red-950/50 text-center">
-          <div className="container mx-auto px-6 max-w-3xl">
-            {/* Added more spacing between characters */}
-            <h2 className="font-gothic text-5xl md:text-6xl mb-6 text-red-600 font-bold tracking-widest">AMPLIFY  YOUR  EXPERIENCE</h2>
-            <p className="text-xl text-gray-300 mb-8 font-garamond tracking-wide">
+        <section className="cta-section">
+          <div className="cta-container">
+            <h2 className="cta-title">AMPLIFY YOUR EXPERIENCE</h2>
+            <p className="cta-subtitle">
               Join thousands who have elevated their music experience.
             </p>
             <button 
               onClick={handleDescend}
-              className="bg-red-600 hover:bg-red-700 text-white py-4 px-10 text-xl font-cinzel uppercase tracking-wider transition-colors duration-300 flex items-center justify-center mx-auto"
+              className="cta-button-large"
             >
               Begin Your Journey
-              <FaFire className="ml-2" />
+              <FaFire className="button-icon" />
             </button>
           </div>
         </section>
       </main>
       
-      <footer className="py-8 border-t border-red-900/30 bg-black z-20">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-          {/* Added more spacing to logo in footer */}
-          <div className="text-red-600 font-gothic text-2xl mb-4 md:mb-0 font-bold tracking-widest">A M P L I F I R E</div>
+      <footer className="site-footer">
+        <div className="footer-container">
+          <div className="footer-logo">A M P L I F I R E</div>
           
-          <div className="flex space-x-6 text-gray-500">
-            <Link href="#" className="hover:text-red-600 transition-colors duration-200 font-garamond">Privacy</Link>
-            <Link href="#" className="hover:text-red-600 transition-colors duration-200 font-garamond">Terms</Link>
-            <Link href="#" className="hover:text-red-600 transition-colors duration-200 font-garamond">Support</Link>
-            <Link href="#" className="hover:text-red-600 transition-colors duration-200 font-garamond">Contact</Link>
+          <div className="footer-links">
+            <Link href="#" className="footer-link">Privacy</Link>
+            <Link href="#" className="footer-link">Terms</Link>
+            <Link href="#" className="footer-link">Support</Link>
+            <Link href="#" className="footer-link">Contact</Link>
           </div>
         </div>
-        <div className="container mx-auto px-6 mt-6 text-center text-gray-600 text-sm font-garamond">
+        <div className="copyright">
           © 2025 Amplifire. All rights reserved.
         </div>
       </footer>
       
-      <style jsx global>{`
+      <style jsx>{`
         @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
         
-        :root {
-          --font-garamond: 'EB Garamond', serif;
-          --font-cinzel: 'Cinzel', serif;
-          --font-gothic: 'Pirata One', cursive;
+        /* Loading Screen */
+        .loading-screen {
+          position: fixed;
+          inset: 0;
+          background-color: #b91c1c; /* Changed to a solid red */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 50;
         }
         
-        body {
-          font-family: var(--font-garamond);
+        .loading-icon {
+          width: 6rem;
+          height: 6rem;
+          position: relative;
+          animation: pulse 2s infinite;
         }
         
-        .font-garamond {
-          font-family: var(--font-garamond);
+        .loading-icon > :global(svg) {
+          width: 100%;
+          height: 100%;
+          color: #000; /* Black icon */
         }
         
-        .font-cinzel {
-          font-family: var(--font-cinzel);
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.8; }
+          100% { transform: scale(1); opacity: 1; }
         }
         
-        .font-gothic {
-          font-family: var(--font-gothic);
+        /* Main Container */
+        .app-container {
+          min-height: 100vh;
+          background-color: #000;
+          color: #fff;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          font-family: 'EB Garamond', serif;
         }
         
-        html {
-          scroll-behavior: smooth;
+        /* Background Elements */
+        .background-image {
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          opacity: 0.25;
+          background-image: url('/images/dark-texture.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
         }
         
-        /* Added letter-spacing for gothic text elements */
-        .font-gothic {
-          letter-spacing: 0.10em;
+        .ember-container {
+          position: fixed;
+          inset: 0;
+          z-index: 10;
+          pointer-events: none;
+        }
+        
+        .ember {
+          position: absolute;
+          border-radius: 9999px;
+          background-color: #fb923c;
+          opacity: 0.4;
+          transition: top 0.5s ease-out, left 0.5s ease-out;
+          filter: blur(1px);
+        }
+        
+        /* Content Sections */
+        .main-content {
+          flex-grow: 1;
+          z-index: 20;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+          position: relative;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+        
+        .hero-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, #000, rgba(127, 29, 29, 0.2), #000);
+        }
+        
+        .hero-content {
+          padding: 0 1.5rem;
+          z-index: 10;
+          text-align: center;
+          max-width: 80rem;
+          margin: 0 auto;
+        }
+        
+        .site-title {
+          font-family: 'Pirata One', cursive;
+          font-size: 5rem;
+          margin-bottom: 1rem;
+          color: #dc2626;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+        }
+        
+        .site-subtitle {
+          font-family: 'EB Garamond', serif;
+          font-size: 1.25rem;
+          margin-bottom: 3rem;
+          max-width: 36rem;
+          margin-left: auto;
+          margin-right: auto;
+          color: #d1d5db;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+        }
+        
+        .cta-button {
+          position: relative;
+          background-color: #991b1b;
+          color: #fff;
+          padding: 0.75rem 2rem;
+          border-radius: 0.125rem;
+          font-family: 'Cinzel', serif;
+          font-size: 1.125rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          transition: all 0.3s;
+          overflow: hidden;
+          border: 1px solid #dc2626;
+        }
+        
+        .cta-button:hover {
+          background-color: #7f1d1d;
+        }
+        
+        .button-text {
+          position: relative;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+        }
+        
+        .button-icon {
+          margin-left: 0.5rem;
+        }
+        
+        .button-background {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to right, #7f1d1d, #b91c1c);
+          transform: translateY(100%);
+          transition: transform 0.3s;
+        }
+        
+        .cta-button:hover .button-background {
+          transform: translateY(0);
+        }
+        
+        /* Features Section */
+        .features-section {
+          padding: 5rem 0;
+          background: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.95), #000);
+          border-top: 1px solid rgba(127, 29, 29, 0.3);
+        }
+        
+        .section-container {
+          max-width: 80rem;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+        }
+        
+        .section-title {
+          font-family: 'Pirata One', cursive;
+          font-size: 2.5rem;
+          margin-bottom: 4rem;
+          text-align: center;
+          color: #dc2626;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+        }
+        
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+          gap: 3rem;
+        }
+        
+        @media (min-width: 768px) {
+          .site-title {
+            font-size: 7rem;
+          }
+          
+          .site-subtitle {
+            font-size: 1.5rem;
+          }
+          
+          .section-title {
+            font-size: 3rem;
+          }
+          
+          .features-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+        
+        .feature-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding: 1.5rem;
+          border: 1px solid rgba(127, 29, 29, 0.5);
+          background-color: rgba(0, 0, 0, 0.7);
+          transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+          background-color: rgba(127, 29, 29, 0.3);
+        }
+        
+        .feature-icon-wrapper {
+          margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+          color: #ef4444;
+          font-size: 2.5rem;
+        }
+        
+        .feature-title {
+          font-family: 'Cinzel', serif;
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin-bottom: 0.75rem;
+          color: #fff;
+          letter-spacing: 0.1em;
+        }
+        
+        .feature-description {
+          color: #9ca3af;
+          font-family: 'EB Garamond', serif;
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+          padding: 5rem 0;
+          background-color: #000;
+          border-top: 1px solid rgba(127, 29, 29, 0.3);
+        }
+        
+        .pricing-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          max-width: 64rem;
+          margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+          .pricing-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+        
+        .pricing-card {
+          display: flex;
+          flex-direction: column;
+          padding: 2rem;
+          border: 1px solid rgba(127, 29, 29, 0.3);
+          background-color: #000;
+          position: relative;
+        }
+        
+        .pricing-card.highlighted {
+          border-color: #dc2626;
+          background: linear-gradient(to bottom, rgba(127, 29, 29, 0.4), #000);
+        }
+        
+        .popular-tag {
+          position: absolute;
+          top: -1rem;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+        
+        .popular-tag span {
+          background-color: #dc2626;
+          color: #fff;
+          font-size: 0.875rem;
+          padding: 0.25rem 0.75rem;
+          font-family: 'Cinzel', serif;
+          letter-spacing: 0.1em;
+        }
+        
+        .plan-icon-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1rem;
+        }
+        
+        .plan-icon {
+          color: #ef4444;
+          font-size: 1.875rem;
+        }
+        
+        .plan-name {
+          font-family: 'Cinzel', serif;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+          color: #fff;
+          text-align: center;
+          letter-spacing: 0.1em;
+        }
+        
+        .plan-price {
+          margin-bottom: 1.5rem;
+          text-align: center;
+        }
+        
+        .price-amount {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #dc2626;
+          font-family: 'Pirata One', cursive;
+        }
+        
+        .price-period {
+          color: #6b7280;
+          margin-left: 0.25rem;
+          font-family: 'EB Garamond', serif;
+        }
+        
+        .plan-features {
+          margin-bottom: 2rem;
+          flex-grow: 1;
+        }
+        
+        .feature-item {
+          margin-bottom: 0.5rem;
+          color: #9ca3af;
+          display: flex;
+          align-items: center;
+          font-family: 'EB Garamond', serif;
+        }
+        
+        .list-icon {
+          color: #dc2626;
+          margin-right: 0.5rem;
+          flex-shrink: 0;
+        }
+        
+        .select-plan-button {
+          background-color: #000;
+          color: #fff;
+          padding: 0.5rem 1rem;
+          font-family: 'Cinzel', serif;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          transition: background-color 0.3s;
+          border: 1px solid #7f1d1d;
+        }
+        
+        .select-plan-button:hover {
+          background-color: #450a0a;
+        }
+        
+        .select-plan-button.highlighted {
+          background-color: #dc2626;
+          border: none;
+        }
+        
+        .select-plan-button.highlighted:hover {
+          background-color: #b91c1c;
+        }
+        
+        /* Call to Action Section */
+        .cta-section {
+          padding: 5rem 0;
+          background: linear-gradient(to bottom, #000, rgba(127, 29, 29, 0.5));
+          text-align: center;
+        }
+        
+        .cta-container {
+          max-width: 48rem;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+        }
+        
+        .cta-title {
+          font-family: 'Pirata One', cursive;
+          font-size: 3rem;
+          margin-bottom: 1.5rem;
+          color: #dc2626;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+        }
+        
+        .cta-subtitle {
+          font-size: 1.25rem;
+          color: #d1d5db;
+          margin-bottom: 2rem;
+          font-family: 'EB Garamond', serif;
+          letter-spacing: 0.05em;
+        }
+        
+        .cta-button-large {
+          background-color: #dc2626;
+          color: #fff;
+          padding: 1rem 2.5rem;
+          font-size: 1.25rem;
+          font-family: 'Cinzel', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          transition: background-color 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto;
+        }
+        
+        .cta-button-large:hover {
+          background-color: #b91c1c;
+        }
+        
+        .cta-button-large .button-icon {
+          margin-left: 0.5rem;
+        }
+        
+        @media (min-width: 768px) {
+          .cta-title {
+            font-size: 4rem;
+          }
+        }
+        
+        /* Footer */
+        .site-footer {
+          padding: 2rem 0;
+          border-top: 1px solid rgba(127, 29, 29, 0.3);
+          background-color: #000;
+          z-index: 20;
+        }
+        
+        .footer-container {
+          max-width: 80rem;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+        .footer-logo {
+          color: #dc2626;
+          font-family: 'Pirata One', cursive;
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+        }
+        
+        .footer-links {
+          display: flex;
+          gap: 1.5rem;
+          color: #6b7280;
+        }
+        
+        .footer-link {
+          transition: color 0.2s;
+          font-family: 'EB Garamond', serif;
+        }
+        
+        .footer-link:hover {
+          color: #dc2626;
+        }
+        
+        .copyright {
+          max-width: 80rem;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+          margin-top: 1.5rem;
+          text-align: center;
+          color: #4b5563;
+          font-size: 0.875rem;
+          font-family: 'EB Garamond', serif;
+        }
+        
+        @media (min-width: 768px) {
+          .footer-container {
+            flex-direction: row;
+          }
+          
+          .footer-logo {
+            margin-bottom: 0;
+          }
         }
       `}</style>
     </div>

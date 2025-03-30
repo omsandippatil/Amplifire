@@ -30,9 +30,7 @@ export default function AmpliFire() {
       }));
       setEmberPosition(newEmbers);
     };
-
     generateEmbers();
-
     const interval = setInterval(() => {
       setEmberPosition((prev) =>
         prev.map((ember) => ({
@@ -43,7 +41,6 @@ export default function AmpliFire() {
         }))
       );
     }, 100);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -54,11 +51,24 @@ export default function AmpliFire() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-gradient-to-b from-black to-red-950/80 flex items-center justify-center z-50">
-        <div className="w-28 h-28 relative">
-          <FaFire className="w-full h-full text-red-600 animate-pulse" />
-          <div className="absolute inset-0 animate-ping bg-red-600 rounded-full opacity-20"></div>
-          <p className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-white font-bebas tracking-wider text-lg">AMPLIFIRE</p>
+      <div className="fixed inset-0 flex items-center justify-center z-50" style={{ backgroundColor: "#FF0000" }}>
+        <div className="relative">
+          <style>
+            {`
+              @keyframes pulse {
+                0% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.1); opacity: 0.8; }
+                100% { transform: scale(1); opacity: 1; }
+              }
+              .loading-icon {
+                animation: pulse 1.5s infinite ease-in-out;
+                width: 100px;
+                height: 100px;
+                color: #000000;
+              }
+            `}
+          </style>
+          <FaFire className="loading-icon" />
         </div>
       </div>
     );
@@ -97,16 +107,30 @@ export default function AmpliFire() {
           ></div>
         ))}
       </div>
-
       <Sidebar />
       
       <main className="ml-64 pr-8 pl-8 pt-6 pb-28 z-20">
+        <style>
+          {`
+            .playlist-grid {
+              display: grid;
+              grid-template-columns: repeat(4, minmax(0, 1fr));
+              gap: 2rem;
+            }
+            
+            .playlist-grid > * {
+              width: 100%;
+              max-width: 240px;
+              margin: 0 auto;
+            }
+          `}
+        </style>
         
         <section className="mb-14">
           <h2 className="font-oswald text-2xl mb-8 text-white tracking-wide border-b border-red-900/40 pb-3 uppercase flex items-center">
             <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">Featured Playlists</span>
           </h2>
-          <div className="grid grid-cols-4 gap-8">
+          <div className="playlist-grid">
             {playlists.map(playlist => <PlaylistItem key={playlist.id} playlist={playlist} />)}
           </div>
         </section>

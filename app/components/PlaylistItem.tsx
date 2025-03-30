@@ -4,6 +4,7 @@ import { FaPlayCircle } from 'react-icons/fa';
 import { GiFlamer } from 'react-icons/gi';
 import { Playlist } from '@/app/data';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const PlaylistItem = ({ playlist }: { playlist: Playlist }) => {
   const router = useRouter();
@@ -22,10 +23,19 @@ const PlaylistItem = ({ playlist }: { playlist: Playlist }) => {
       }}
     >
       <div className="relative overflow-hidden h-40">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 to-black/70"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <GiFlamer className="text-red-600 text-5xl opacity-70" />
-        </div>
+        {playlist.image ? (
+          <Image 
+            src={playlist.image} 
+            alt={`${playlist.name} playlist cover`}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-900/30 to-black/70">
+            <GiFlamer className="text-red-600 text-5xl opacity-70" />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 to-black/70 opacity-60"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 p-3">
           <h3 className="font-oswald text-white font-bold tracking-wide">{playlist.name}</h3>
