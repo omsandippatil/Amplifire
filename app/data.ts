@@ -43,7 +43,7 @@ export const songs: Song[] = [
   { id: 2, title: "Desi Kalakaar", artist: "Yo Yo Honey Singh", duration: "4:12", image: "/images/song.jpg", album: "Desi Kalakaar" },
   { id: 3, title: "Dhaakad", artist: "Raftaar", duration: "3:45", image: "/images/song.jpg", album: "Zero to Infinity" },
   { id: 4, title: "Proper Patola", artist: "Diljit Dosanjh", duration: "4:05", image: "/images/song.jpg", album: "GOAT" },
-  { id: 5, title: "Garmi", artist: "Badshah", duration: "3:52", image: "/images/song5.jpg", album: "Street Dancer 3D" },
+  { id: 5, title: "Garmi", artist: "Badshah", duration: "3:52", image: "/images/song.jpg", album: "Street Dancer 3D" },
   { id: 6, title: "Brown Rang", artist: "Yo Yo Honey Singh", duration: "4:25", image: "/images/song.jpg", album: "International Villager" },
   { id: 7, title: "Swag Mera Desi", artist: "Raftaar", duration: "3:40", image: "/images/song.jpg", album: "Desi Hip-Hop" },
   { id: 8, title: "Lover", artist: "Diljit Dosanjh", duration: "3:50", image: "/images/song.jpg", album: "MoonChild Era" },
