@@ -12,12 +12,27 @@ const MusicPlayer = () => {
   const totalTime = 270;
 
   useEffect(() => {
-    let interval;
-    if (isPlaying) interval = setInterval(() => setCurrentTime(prev => (prev >= totalTime ? (setIsPlaying(false), 0) : prev + 1)), 1000);
-    return () => clearInterval(interval);
+    let interval: NodeJS.Timeout | undefined;
+    
+    if (isPlaying) {
+      interval = setInterval(() => 
+        setCurrentTime(prev => {
+          if (prev >= totalTime) {
+            setIsPlaying(false);
+            return 0;
+          }
+          return prev + 1;
+        }), 
+      1000);
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [isPlaying]);
 
-  const formatTime = (seconds) => `${Math.floor(seconds / 60)}:${(seconds % 60).toString().padStart(2, '0')}`;
+  const formatTime = (seconds: number): string => 
+    `${Math.floor(seconds / 60)}:${(seconds % 60).toString().padStart(2, '0')}`;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 backdrop-blur-md bg-black/40 border-t border-red-900/30 p-2 z-50 shadow-lg">
