@@ -8,6 +8,7 @@ import { songs, artists } from '@/app/data';
 import { ContentContainer } from '@/app/components/ContentComponents';
 import Link from 'next/link';
 import { CSSProperties } from 'react';
+import Image from 'next/image';
 import '@/app/globals.css'
 
 const styles: Record<string, CSSProperties> = {
@@ -42,17 +43,24 @@ const styles: Record<string, CSSProperties> = {
     overflow: 'hidden',
     boxShadow: '0 12px 32px rgba(139, 0, 0, 0.3)'
   },
+  albumImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover'
+  },
   albumGradient: {
     position: 'absolute',
     inset: 0,
-    background: 'linear-gradient(135deg, rgba(139, 0, 0, 0.5), rgba(0, 0, 0, 0.9))'
+    background: 'linear-gradient(135deg, rgba(139, 0, 0, 0.5), rgba(0, 0, 0, 0.9))',
+    zIndex: 1
   },
   iconContainer: {
     position: 'absolute',
     inset: 0,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    zIndex: 2
   },
   songTitle: {
     fontFamily: '"Oswald", sans-serif',
@@ -234,13 +242,10 @@ const styles: Record<string, CSSProperties> = {
   relatedIcon: {
     width: '42px',
     height: '42px',
-    backgroundColor: 'rgba(20, 20, 20, 0.6)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     borderRadius: '10px',
     marginRight: '16px',
-    border: '1px solid rgba(139, 0, 0, 0.3)'
+    position: 'relative',
+    overflow: 'hidden'
   },
   relatedInfo: {
     flex: 1
@@ -457,8 +462,17 @@ It's the reason I'm alive`
       
       <div style={styles.contentGrid}>
         <div style={styles.leftColumn}>
-          {/* Album Art */}
+          {/* Album Art with Image */}
           <div style={styles.albumArt}>
+            {song.image ? (
+              <Image 
+                src={song.image} 
+                alt={`${song.title} album art`} 
+                layout="fill" 
+                objectFit="cover"
+                style={styles.albumImage}
+              />
+            ) : null}
             <div style={styles.albumGradient}></div>
             <div style={styles.iconContainer}>
               <GiFlamer style={{color: '#e53e3e', fontSize: '84px', opacity: 0.9}} />
@@ -622,7 +636,7 @@ It's the reason I'm alive`
         </div>
         
         <div style={styles.rightColumn}>
-          {/* Related Songs */}
+          {/* Related Songs with Images */}
           <h2 style={styles.sectionTitle}>
             <GiFlamer style={{color: '#e53e3e'}} /> You Might Also Like
           </h2>
@@ -643,7 +657,16 @@ It's the reason I'm alive`
                   onMouseLeave={() => handleHover(`relatedSong-${relatedSong.id}`, false)}
                 >
                   <div style={styles.relatedIcon}>
-                    <GiFlamer style={{color: '#e53e3e', fontSize: '20px'}} />
+                    {relatedSong.image ? (
+                      <Image 
+                        src={relatedSong.image} 
+                        alt={`${relatedSong.title} thumbnail`} 
+                        layout="fill" 
+                        objectFit="cover"
+                      />
+                    ) : (
+                      <GiFlamer style={{color: '#e53e3e', fontSize: '20px'}} />
+                    )}
                   </div>
                   <div style={styles.relatedInfo}>
                     <h4 style={styles.relatedTitle}>{relatedSong.title}</h4>

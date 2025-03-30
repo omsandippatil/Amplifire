@@ -6,6 +6,8 @@ import { GiFlamer } from 'react-icons/gi';
 import { playlists, songs } from '@/app/data';
 import { ContentContainer } from '@/app/components/ContentComponents';
 import Link from 'next/link';
+import Image from 'next/image';
+import '@/app/globals.css'
 
 // Define styles using proper CSSProperties type
 const styles: Record<string, CSSProperties> = {
@@ -43,10 +45,19 @@ const styles: Record<string, CSSProperties> = {
     boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
     border: '1px solid rgba(139, 0, 0, 0.2)',
   },
+  playlistImage: {
+    position: 'absolute',
+    inset: 0,
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%',
+    zIndex: 1,
+  },
   playlistGradient: {
     position: 'absolute',
     inset: 0,
     background: 'linear-gradient(135deg, rgba(139, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%)',
+    zIndex: 2,
   },
   playlistIcon: {
     position: 'absolute',
@@ -57,6 +68,7 @@ const styles: Record<string, CSSProperties> = {
     color: '#991b1b',
     fontSize: '80px',
     opacity: 0.7,
+    zIndex: 3,
   },
   playlistInfo: {
     position: 'absolute',
@@ -65,6 +77,7 @@ const styles: Record<string, CSSProperties> = {
     right: 0,
     padding: '16px',
     background: 'linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%)',
+    zIndex: 4,
   },
   playlistTitle: {
     fontFamily: 'Oswald, sans-serif',
@@ -142,6 +155,15 @@ const styles: Record<string, CSSProperties> = {
     color: '#6b7280',
     marginRight: '16px',
     fontSize: '14px',
+  },
+  trackImageContainer: {
+    width: '36px',
+    height: '36px',
+    marginRight: '16px',
+    borderRadius: '4px',
+    overflow: 'hidden',
+    border: '1px solid rgba(139, 0, 0, 0.2)',
+    position: 'relative',
   },
   trackIcon: {
     width: '36px',
@@ -254,6 +276,15 @@ export default function PlaylistPage() {
       <div className="responsive-grid" style={styles.grid}>
         <div>
           <div style={styles.playlistCard}>
+            {playlist.image && (
+              <Image 
+                src={playlist.image} 
+                alt={playlist.name}
+                fill
+                style={styles.playlistImage}
+                priority
+              />
+            )}
             <div style={styles.playlistGradient}></div>
             <div style={styles.playlistIcon}>
               <GiFlamer />
@@ -309,9 +340,20 @@ export default function PlaylistPage() {
                   <div style={styles.trackNumber}>
                     <span>{index + 1}</span>
                   </div>
-                  <div style={styles.trackIcon}>
-                    <GiFlamer style={{ color: '#991b1b', fontSize: '12px' }} />
-                  </div>
+                  {song.image ? (
+                    <div style={styles.trackImageContainer}>
+                      <Image 
+                        src={song.image} 
+                        alt={song.title}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  ) : (
+                    <div style={styles.trackIcon}>
+                      <GiFlamer style={{ color: '#991b1b', fontSize: '12px' }} />
+                    </div>
+                  )}
                   <div style={styles.trackInfo}>
                     <h4 style={styles.trackTitle}>{song.title}</h4>
                     <p style={styles.trackArtist}>{song.artist}</p>

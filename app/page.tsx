@@ -121,7 +121,7 @@ export default function Home() {
         {/* Features Section */}
         <section className="features-section">
           <div className="section-container">
-            <h2 className="section-title">F E A T U R E S</h2>
+            <h2 className="section-title">FEATURES</h2>
             
             <div className="features-grid">
               {[
@@ -258,7 +258,7 @@ export default function Home() {
       
       <footer className="site-footer">
         <div className="footer-container">
-          <div className="footer-logo">A M P L I F I R E</div>
+          <div className="footer-logo">AMPLIFIRE</div>
           
           <div className="footer-links">
             <Link href="#" className="footer-link">Privacy</Link>
@@ -273,15 +273,13 @@ export default function Home() {
       </footer>
       
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&display=swap');
         
         /* Loading Screen */
         .loading-screen {
           position: fixed;
           inset: 0;
-          background-color: #b91c1c; /* Changed to a solid red */
+          background-color: #b91c1c; /* Solid red background */
           display: flex;
           align-items: center;
           justify-content: center;
@@ -303,7 +301,7 @@ export default function Home() {
         
         @keyframes pulse {
           0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.1); opacity: 0.8; }
+          50% { transform: scale(1.2); opacity: 0.8; }
           100% { transform: scale(1); opacity: 1; }
         }
         
@@ -315,7 +313,7 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           position: relative;
-          font-family: 'EB Garamond', serif;
+          font-family: 'Times New Roman', serif;
         }
         
         /* Background Elements */
@@ -377,16 +375,16 @@ export default function Home() {
         }
         
         .site-title {
-          font-family: 'Pirata One', cursive;
+          font-family: 'Times New Roman', serif;
           font-size: 5rem;
           margin-bottom: 1rem;
           color: #dc2626;
           font-weight: 700;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.05em;
         }
         
         .site-subtitle {
-          font-family: 'EB Garamond', serif;
+          font-family: 'Times New Roman', serif;
           font-size: 1.25rem;
           margin-bottom: 3rem;
           max-width: 36rem;
@@ -403,10 +401,10 @@ export default function Home() {
           color: #fff;
           padding: 0.75rem 2rem;
           border-radius: 0.125rem;
-          font-family: 'Cinzel', serif;
+          font-family: 'Times New Roman', serif;
           font-size: 1.125rem;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.05em;
           transition: all 0.3s;
           overflow: hidden;
           border: 1px solid #dc2626;
@@ -453,13 +451,13 @@ export default function Home() {
         }
         
         .section-title {
-          font-family: 'Pirata One', cursive;
+          font-family: 'Times New Roman', serif;
           font-size: 2.5rem;
           margin-bottom: 4rem;
           text-align: center;
           color: #dc2626;
           font-weight: 700;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.05em;
         }
         
         .features-grid {
@@ -511,17 +509,17 @@ export default function Home() {
         }
         
         .feature-title {
-          font-family: 'Cinzel', serif;
+          font-family: 'Times New Roman', serif;
           font-size: 1.25rem;
           font-weight: 700;
           margin-bottom: 0.75rem;
           color: #fff;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.05em;
         }
         
         .feature-description {
           color: #9ca3af;
-          font-family: 'EB Garamond', serif;
+          font-family: 'Times New Roman', serif;
         }
         
         /* Pricing Section */
@@ -572,8 +570,8 @@ export default function Home() {
           color: #fff;
           font-size: 0.875rem;
           padding: 0.25rem 0.75rem;
-          font-family: 'Cinzel', serif;
-          letter-spacing: 0.1em;
+          font-family: 'Times New Roman', serif;
+          letter-spacing: 0.05em;
         }
         
         .plan-icon-wrapper {
@@ -589,13 +587,13 @@ export default function Home() {
         }
         
         .plan-name {
-          font-family: 'Cinzel', serif;
+          font-family: 'Times New Roman', serif;
           font-size: 1.5rem;
           font-weight: 700;
           margin-bottom: 0.5rem;
           color: #fff;
           text-align: center;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.05em;
         }
         
         .plan-price {
@@ -607,13 +605,13 @@ export default function Home() {
           font-size: 2.5rem;
           font-weight: 700;
           color: #dc2626;
-          font-family: 'Pirata One', cursive;
+          font-family: 'Times New Roman', serif;
         }
         
         .price-period {
           color: #6b7280;
           margin-left: 0.25rem;
-          font-family: 'EB Garamond', serif;
+          font-family: 'Times New Roman', serif;
         }
         
         .plan-features {
@@ -626,7 +624,7 @@ export default function Home() {
           color: #9ca3af;
           display: flex;
           align-items: center;
-          font-family: 'EB Garamond', serif;
+          font-family: 'Times New Roman', serif;
         }
         
         .list-icon {
@@ -639,7 +637,7 @@ export default function Home() {
           background-color: #000;
           color: #fff;
           padding: 0.5rem 1rem;
-          font-family: 'Cinzel', serif;
+          font-family: 'Times New Roman', serif;
           font-weight: 500;
           letter-spacing: 0.05em;
           transition: background-color 0.3s;
@@ -673,19 +671,19 @@ export default function Home() {
         }
         
         .cta-title {
-          font-family: 'Pirata One', cursive;
+          font-family: 'Times New Roman', serif;
           font-size: 3rem;
           margin-bottom: 1.5rem;
           color: #dc2626;
           font-weight: 700;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.05em;
         }
         
         .cta-subtitle {
           font-size: 1.25rem;
           color: #d1d5db;
           margin-bottom: 2rem;
-          font-family: 'EB Garamond', serif;
+          font-family: 'Times New Roman', serif;
           letter-spacing: 0.05em;
         }
         
@@ -694,9 +692,9 @@ export default function Home() {
           color: #fff;
           padding: 1rem 2.5rem;
           font-size: 1.25rem;
-          font-family: 'Cinzel', serif;
+          font-family: 'Times New Roman', serif;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.05em;
           transition: background-color 0.3s;
           display: flex;
           align-items: center;
@@ -738,11 +736,11 @@ export default function Home() {
         
         .footer-logo {
           color: #dc2626;
-          font-family: 'Pirata One', cursive;
+          font-family: 'Times New Roman', serif;
           font-size: 1.5rem;
           margin-bottom: 1rem;
           font-weight: 700;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.05em;
         }
         
         .footer-links {
@@ -753,7 +751,7 @@ export default function Home() {
         
         .footer-link {
           transition: color 0.2s;
-          font-family: 'EB Garamond', serif;
+          font-family: 'Times New Roman', serif;
         }
         
         .footer-link:hover {
@@ -768,7 +766,7 @@ export default function Home() {
           text-align: center;
           color: #4b5563;
           font-size: 0.875rem;
-          font-family: 'EB Garamond', serif;
+          font-family: 'Times New Roman', serif;
         }
         
         @media (min-width: 768px) {

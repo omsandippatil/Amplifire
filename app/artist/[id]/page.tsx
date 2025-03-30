@@ -6,6 +6,7 @@ import { FaPlayCircle, FaHeart, FaArrowLeft } from 'react-icons/fa';
 import { GiFlamer } from 'react-icons/gi';
 import { artists, songs } from '@/app/data';
 import Link from 'next/link';
+import Image from 'next/image';
 import '@/app/globals.css'
 
 // Define types for CSS properties to fix TypeScript errors
@@ -60,10 +61,16 @@ export default function ArtistPage() {
       overflow: 'hidden',
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
     },
+    coverImage: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+    },
     coverGradient: {
       position: 'absolute',
       inset: 0,
       background: 'linear-gradient(135deg, rgba(139, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%)',
+      zIndex: 1,
     },
     coverIcon: {
       position: 'absolute',
@@ -74,6 +81,7 @@ export default function ArtistPage() {
       color: '#ab2626',
       fontSize: '5rem',
       opacity: 0.7,
+      zIndex: 1,
     },
     coverInfo: {
       position: 'absolute',
@@ -82,6 +90,7 @@ export default function ArtistPage() {
       right: 0,
       padding: '1.5rem',
       background: 'linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%)',
+      zIndex: 2,
     },
     title: {
       margin: 0,
@@ -167,6 +176,13 @@ export default function ArtistPage() {
       borderRadius: '4px',
       marginRight: '1rem',
       border: '1px solid rgba(171, 38, 38, 0.2)',
+      overflow: 'hidden',
+      position: 'relative',
+    },
+    trackImage: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
     },
     trackInfo: {
       flex: 1,
@@ -252,10 +268,19 @@ export default function ArtistPage() {
       <div style={styles.grid}>
         <div>
           <div style={styles.cover}>
+            {artist.image ? (
+              <Image 
+                src={artist.image} 
+                alt={artist.name}
+                fill
+                style={styles.coverImage}
+              />
+            ) : (
+              <div style={styles.coverIcon}>
+                <GiFlamer />
+              </div>
+            )}
             <div style={styles.coverGradient}></div>
-            <div style={styles.coverIcon}>
-              <GiFlamer />
-            </div>
             <div style={styles.coverInfo}>
               <h1 style={styles.title}>{artist.name}</h1>
               <p style={styles.subtitle}>{artist.genre} • {artistSongs.length} Songs</p>
@@ -293,7 +318,17 @@ export default function ArtistPage() {
                     {index + 1}
                   </div>
                   <div style={styles.trackIcon}>
-                    <GiFlamer style={{ color: '#ab2626', fontSize: '0.8rem' }} />
+                    {song.image ? (
+                      <Image 
+                        src={song.image} 
+                        alt={song.title}
+                        width={38}
+                        height={38}
+                        style={styles.trackImage}
+                      />
+                    ) : (
+                      <GiFlamer style={{ color: '#ab2626', fontSize: '0.8rem' }} />
+                    )}
                   </div>
                   <div style={styles.trackInfo}>
                     <div style={styles.trackTitle}>{song.title}</div>
