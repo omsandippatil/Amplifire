@@ -67,10 +67,34 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="loading-screen">
-        <div className="loading-icon">
-          <FaFire />
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: '#b91c1c', /* Red background */
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 50
+      }}>
+        <div style={{
+          width: '6rem',
+          height: '6rem',
+          position: 'relative',
+          animation: 'pulse 2s infinite'
+        }}>
+          <FaFire style={{
+            width: '100%',
+            height: '100%',
+            color: '#000' /* Black icon */
+          }} />
         </div>
+        <style jsx>{`
+          @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+          }
+        `}</style>
       </div>
     );
   }
@@ -274,36 +298,6 @@ export default function Home() {
       
       <style jsx>{`
         @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&display=swap');
-        
-        /* Loading Screen */
-        .loading-screen {
-          position: fixed;
-          inset: 0;
-          background-color: #b91c1c; /* Solid red background */
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 50;
-        }
-        
-        .loading-icon {
-          width: 6rem;
-          height: 6rem;
-          position: relative;
-          animation: pulse 2s infinite;
-        }
-        
-        .loading-icon > :global(svg) {
-          width: 100%;
-          height: 100%;
-          color: #000; /* Black icon */
-        }
-        
-        @keyframes pulse {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.2); opacity: 0.8; }
-          100% { transform: scale(1); opacity: 1; }
-        }
         
         /* Main Container */
         .app-container {

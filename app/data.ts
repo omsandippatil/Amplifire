@@ -28,7 +28,7 @@ export const playlists: Playlist[] = [
   { id: 1, name: "Bollywood Bangers", tracks: 12, image: "/images/playlist1.jpg" },
   { id: 2, name: "Desi Hip-Hop Vibes", tracks: 8, image: "/images/playlist2.jpg" },
   { id: 3, name: "Punjabi Power", tracks: 15, image: "/images/playlist3.jpg" },
-  { id: 4, name: "Rap Revolution", tracks: 10, image: "/images/playlist4.jpg" },
+  { id: 4, name: "Rap Revolution", tracks: 10, image: "/images/playlist2.jpg" },
 ];
 
 export const artists: Artist[] = [
@@ -39,12 +39,12 @@ export const artists: Artist[] = [
 ];
 
 export const songs: Song[] = [
-  { id: 1, title: "DJ Waley Babu", artist: "Badshah", duration: "3:30", image: "/images/song1.jpg", album: "ONE" },
-  { id: 2, title: "Desi Kalakaar", artist: "Yo Yo Honey Singh", duration: "4:12", image: "/images/song2.jpg", album: "Desi Kalakaar" },
-  { id: 3, title: "Dhaakad", artist: "Raftaar", duration: "3:45", image: "/images/song3.jpg", album: "Zero to Infinity" },
-  { id: 4, title: "Proper Patola", artist: "Diljit Dosanjh", duration: "4:05", image: "/images/song4.jpg", album: "GOAT" },
+  { id: 1, title: "DJ Waley Babu", artist: "Badshah", duration: "3:30", image: "/images/song.jpg", album: "ONE" },
+  { id: 2, title: "Desi Kalakaar", artist: "Yo Yo Honey Singh", duration: "4:12", image: "/images/song.jpg", album: "Desi Kalakaar" },
+  { id: 3, title: "Dhaakad", artist: "Raftaar", duration: "3:45", image: "/images/song.jpg", album: "Zero to Infinity" },
+  { id: 4, title: "Proper Patola", artist: "Diljit Dosanjh", duration: "4:05", image: "/images/song.jpg", album: "GOAT" },
   { id: 5, title: "Garmi", artist: "Badshah", duration: "3:52", image: "/images/song5.jpg", album: "Street Dancer 3D" },
-  { id: 6, title: "Brown Rang", artist: "Yo Yo Honey Singh", duration: "4:25", image: "/images/song6.jpg", album: "International Villager" },
-  { id: 7, title: "Swag Mera Desi", artist: "Raftaar", duration: "3:40", image: "/images/song7.jpg", album: "Desi Hip-Hop" },
-  { id: 8, title: "Lover", artist: "Diljit Dosanjh", duration: "3:50", image: "/images/song8.jpg", album: "MoonChild Era" },
+  { id: 6, title: "Brown Rang", artist: "Yo Yo Honey Singh", duration: "4:25", image: "/images/song.jpg", album: "International Villager" },
+  { id: 7, title: "Swag Mera Desi", artist: "Raftaar", duration: "3:40", image: "/images/song.jpg", album: "Desi Hip-Hop" },
+  { id: 8, title: "Lover", artist: "Diljit Dosanjh", duration: "3:50", image: "/images/song.jpg", album: "MoonChild Era" },
 ];
